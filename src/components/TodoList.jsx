@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { deleteTodo } from "../redux/modules/todos";
 
-export default function TodoList({ todos }) {
+export default function TodoList({ todos, setEditState, setEditIndex }) {
   console.log(todos);
   const dispatch = useDispatch();
   return (
@@ -12,7 +12,9 @@ export default function TodoList({ todos }) {
           <span>
             {todo.text}
             <b>
-              <a href="#">Edit</a>
+              <a href="#" onClick={() => setEdit(index)}>
+                Edit
+              </a>
               <a href="#" onClick={() => onDeleteTodo(index)}>
                 Del
               </a>
@@ -24,5 +26,9 @@ export default function TodoList({ todos }) {
   );
   function onDeleteTodo(index) {
     dispatch(deleteTodo(index));
+  }
+  function setEdit(index) {
+    setEditState();
+    setEditIndex(index);
   }
 }

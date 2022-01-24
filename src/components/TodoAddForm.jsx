@@ -9,6 +9,7 @@ export default function TodoForm({ addTodoItem }) {
       </button>
     </div>
   );
+
   function addTodo() {
     addTodoItem(inputRef.current.value);
     inputRef.current.value = "";
