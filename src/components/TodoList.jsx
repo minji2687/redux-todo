@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { deleteTodo } from "../redux/modules/todos";
+import { deleteTodo, todoStateChange } from "../redux/modules/todos";
 
 export default function TodoList({ todos, setEditState, setEditIndex }) {
   console.log(todos);
@@ -8,7 +8,15 @@ export default function TodoList({ todos, setEditState, setEditIndex }) {
     <ul>
       {todos.map((todo, index) => (
         <li key={`${todo.text}-${index}`}>
-          <i className="far fa-check-square"></i>
+          {/* return <button className={`btn ${primary ? "blue" : "null"}`}>버튼</button>; */}
+
+          {/* <i className="far fa-check-square"></i> */}
+          <i
+            className={`${
+              todo.state === "yet" ? "far" : "fas"
+            } fa-check-square`}
+            onClick={() => checkItem(index)}
+          ></i>
           <span>
             {todo.text}
             <b>
@@ -30,5 +38,8 @@ export default function TodoList({ todos, setEditState, setEditIndex }) {
   function setEdit(index) {
     setEditState();
     setEditIndex(index);
+  }
+  function checkItem(index) {
+    dispatch(todoStateChange(index));
   }
 }
